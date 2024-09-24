@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AdminRolesController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\AdminExpensesController;
+use App\Http\Controllers\User\UserCategoriesController;
+use App\Http\Controllers\User\UserExpensesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +47,12 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::get('/admin/adminexpenses', [AdminExpensesController::class, 'index'])->name('admin.adminexpenses');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/user/usercategories', [UserCategoriesController::class, 'index'])->name('user.usercategories');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/user/userexpenses', [UserExpensesController::class, 'index'])->name('user.userexpenses');
 });
 
 // Load authentication routes

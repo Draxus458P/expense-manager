@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashboardController; // Import the AdminDashboardController
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminRolesController;
+use App\Http\Controllers\Admin\AdminUsersController;
+use App\Http\Controllers\Admin\AdminCategoriesController;
+use App\Http\Controllers\Admin\AdminExpensesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +33,18 @@ Route::middleware('auth')->group(function () {
 // Route for the admin dashboard, requiring authentication
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/adminroles', [AdminRolesController::class, 'index'])->name('admin.adminroles');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/adminusers', [AdminUsersController::class, 'index'])->name('admin.adminusers');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/admincategories', [AdminCategoriesController::class, 'index'])->name('admin.admincategories');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/adminexpenses', [AdminExpensesController::class, 'index'])->name('admin.adminexpenses');
 });
 
 // Load authentication routes

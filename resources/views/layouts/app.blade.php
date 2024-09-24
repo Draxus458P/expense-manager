@@ -36,10 +36,11 @@
                             </a>
                             <ul id="userManagementDropdown" class="hidden ml-4 mt-2">
                                 <li class="mb-2">
-                                    <a href="#" class="text-white hover:text-blue-300">Roles</a>
+                                    <a href="{{ route('admin.adminroles') }}" class="text-white hover:text-blue-300">Roles</a>
+
                                 </li>
                                 <li>
-                                    <a href="#" class="text-white hover:text-blue-300">Users</a>
+                                    <a href="{{ route('admin.adminusers') }}" class="text-white hover:text-blue-300">Users</a>
                                 </li>
                             </ul>
                         </li>
@@ -55,10 +56,10 @@
                             </a>
                             <ul id="expenseManagementDropdown" class="hidden ml-4 mt-2">
                                 <li class="mb-2">
-                                    <a href="#" class="text-white hover:text-blue-300">Expense Categories</a>
+                                    <a href="{{ route('admin.admincategories') }}" class="text-white hover:text-blue-300">Expense Categories</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="text-white hover:text-blue-300">Expenses</a>
+                                    <a href="{{ route('admin.adminexpenses') }}" class="text-white hover:text-blue-300">Expenses</a>
                                 </li>
                             </ul>
                         </li>

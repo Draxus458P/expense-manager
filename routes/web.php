@@ -34,15 +34,15 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin/roles')->group(function () {
         Route::get('/', [AdminUploadRoleController::class, 'index'])->name('roles.index');
         Route::post('/', [AdminUploadRoleController::class, 'store'])->name('roles.store');
-        Route::put('/{role}', [AdminUploadRoleController::class, 'update'])->name('roles.update');
-        Route::delete('/{role}', [AdminUploadRoleController::class, 'destroy'])->name('roles.destroy');
+        Route::put('/{user}', [AdminUploadRoleController::class, 'update'])->name('roles.update');
+        Route::delete('/{user}', [AdminUploadRoleController::class, 'destroy'])->name('roles.destroy');
     });
 
     Route::prefix('admin/users')->group(function () {
         Route::get('/', [AdminUsersController::class, 'index'])->name('users.index');
         Route::post('/', [AdminUsersController::class, 'store'])->name('users.store');
-        Route::put('/{role}', [AdminUploadRoleController::class, 'update'])->name('users.update');
-        Route::delete('/{role}', [AdminUploadRoleController::class, 'destroy'])->name('users.destroy');
+        Route::put('/{user}', [AdminUsersController::class, 'update'])->name('users.update');
+        Route::delete('/{user}', [AdminUsersController::class, 'destroy'])->name('users.destroy');
     });
 
     // Admin categories management

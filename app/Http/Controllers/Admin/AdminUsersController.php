@@ -37,4 +37,34 @@ class AdminUsersController extends Controller
 
         return redirect()->back()->with('success', 'Role successfully added!');
     }
+    public function update(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:500',
+            'role' => 'required|string|max:255',
+        ]);
+
+        // Update the role in the database
+        $user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'role' => $validatedData['role'],
+        ]);
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'User successfully updated!');
+    }
+    public function destroy($userId)
+    {
+        // Check if the role exists
+        $user = User::find($userId);
+        if (!$user) {
+            return response()->json(['message' => 'User not found.'], 404);
+        }
+
+        $user->delete();
+
+        return response()->json(['message' => 'User deleted successfully.'], 200);
+    }
 }

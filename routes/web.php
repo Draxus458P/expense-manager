@@ -38,8 +38,12 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{role}', [AdminUploadRoleController::class, 'destroy'])->name('roles.destroy');
     });
 
-    // Admin users management
-    Route::get('/admin/adminusers', [AdminUsersController::class, 'index'])->name('admin.adminusers');
+    Route::prefix('admin/users')->group(function () {
+        Route::get('/', [AdminUsersController::class, 'index'])->name('users.index');
+        Route::post('/', [AdminUsersController::class, 'store'])->name('users.store');
+        Route::put('/{role}', [AdminUploadRoleController::class, 'update'])->name('users.update');
+        Route::delete('/{role}', [AdminUploadRoleController::class, 'destroy'])->name('users.destroy');
+    });
 
     // Admin categories management
     Route::get('/admin/admincategories', [AdminCategoriesController::class, 'index'])->name('admin.admincategories');

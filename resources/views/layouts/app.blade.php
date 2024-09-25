@@ -40,7 +40,7 @@
 
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.adminusers') }}" class="text-white hover:text-blue-300">Users</a>
+                                    <a href="{{ route('users.index') }}" class="text-white hover:text-blue-300">Users</a>
                                 </li>
                             </ul>
                         </li>

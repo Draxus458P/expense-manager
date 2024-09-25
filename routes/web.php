@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [AdminUploadRoleController::class, 'index'])->name('roles.index');
         Route::post('/', [AdminUploadRoleController::class, 'store'])->name('roles.store');
         Route::put('/{role}', [AdminUploadRoleController::class, 'update'])->name('roles.update');
+        Route::delete('/{role}', [AdminUploadRoleController::class, 'destroy'])->name('roles.destroy');
     });
 
     // Admin users management

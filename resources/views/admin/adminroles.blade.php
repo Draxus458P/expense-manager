@@ -112,7 +112,8 @@
 
                     // Open Edit Modal with data from the selected row
                     function openEditModal(roleId, role, roleDesc) {
-                        document.getElementById('editRoleId').value = roleId; // Set role ID
+                        console.log("Opening edit modal for Role ID:", roleId);
+                        document.getElementById('editRoleId').value = roleId;
                         document.getElementById('editDisplayName').value = role;
                         document.getElementById('editDescription').value = roleDesc;
 
@@ -122,20 +123,41 @@
 
                         toggleEditModal(true);
                     }
-
                     // Function to handle role deletion
                     function deleteRole() {
-                        // Handle deletion logic here (e.g., via Ajax)
-                        alert("Role deleted!"); // Placeholder for actual deletion logic
-                        toggleEditModal(false);
+                        const roleId = document.getElementById('editRoleId').value;
+                        console.log(`Attempting to delete role with ID: ${roleId}`);
+                        if (confirm("Are you sure you want to delete this role?")) {
+                            fetch(`/admin/roles/${roleId}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'Accept': 'application/json',
+                                }
+                            }).then(response => {
+                                if (response.ok) {
+                                    return response.json();
+                                } else {
+                                    throw new Error('Failed to delete role. Status: ' + response.status);
+                                }
+                            }).then(data => {
+                                alert(data.message);
+                                location.reload();
+                            }).catch(error => {
+                                console.error('Error:', error);
+                                alert("An error occurred while trying to delete the role: " + error.message);
+                            });
+                        }
                     }
+
+
 
                     setTimeout(() => {
                         const alert = document.getElementById('successMessage');
                         if (alert) {
                             alert.style.display = 'none';
                         }
-                    }, 3000); // 3 seconds
+                    }, 3000);
                 </script>
             </div>
         </div>

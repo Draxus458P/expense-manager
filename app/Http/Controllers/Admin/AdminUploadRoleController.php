@@ -51,4 +51,17 @@ class AdminUploadRoleController extends Controller
         // Redirect back with success message
         return redirect()->back()->with('success', 'Role successfully updated!');
     }
+
+    public function destroy($roleId)
+    {
+        // Check if the role exists
+        $role = Role::find($roleId);
+        if (!$role) {
+            return response()->json(['message' => 'Role not found.'], 404);
+        }
+
+        $role->delete();
+
+        return response()->json(['message' => 'Role deleted successfully.'], 200);
+    }
 }

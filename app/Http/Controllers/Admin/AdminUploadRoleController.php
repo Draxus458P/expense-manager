@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class AdminUploadRoleController extends Controller
 {
+    public function index()
+    {
+        // Fetch all roles from the database
+        $roles = Role::all(); // Adjust the query as necessary (e.g., paginate, filter)
+
+        // Return the view and pass the roles variable
+        return view('admin.adminroles', compact('roles')); // Use the correct view path
+    }
+
     public function store(Request $request)
     {
         // Validate the request data

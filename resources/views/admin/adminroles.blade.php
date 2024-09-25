@@ -26,16 +26,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b cursor-pointer" onclick="openEditModal('Role 1', 'Description 1', '2023-09-24')">
-                                <td class="py-2 px-4">Role 1</td>
-                                <td class="py-2 px-4">Description 1</td>
-                                <td class="py-2 px-4">2023-09-24</td>
+                            @foreach ($roles as $role)
+                            <tr class="border-b cursor-pointer" onclick="openEditModal('{{ $role->id }}', '{{ $role->role }}', '{{ $role->role_desc }}')">
+                                <td class="py-2 px-4">{{ $role->role }}</td>
+                                <td class="py-2 px-4">{{ $role->role_desc }}</td>
+                                <td class="py-2 px-4">{{ $role->created_at->format('Y-m-d') }}</td>
                             </tr>
-                            <tr class="border-b cursor-pointer" onclick="openEditModal('Role 2', 'Description 2', '2023-09-25')">
-                                <td class="py-2 px-4">Role 2</td>
-                                <td class="py-2 px-4">Description 2</td>
-                                <td class="py-2 px-4">2023-09-25</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <div class="mb-6 mt-10 flex justify-end">
@@ -78,9 +75,10 @@
                             <h2 class="text-xl font-bold text-gray-800">Edit Role</h2>
                             <button class="text-gray-600 hover:text-gray-800" onclick="toggleEditModal(false)">&times;</button>
                         </div>
-                        <form id="editRoleForm" action="{{ route('roles.update', ['role' => 1]) }}" method="POST">
+                        <form id="editRoleForm" method="POST" action="{{ route('roles.update', 'role_id_placeholder') }}">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" id="editRoleId" name="role_id">
                             <div class="mb-4">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">Role Name</label>
                                 <input type="text" id="editDisplayName" name="role" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" required>
@@ -113,9 +111,15 @@
                     }
 
                     // Open Edit Modal with data from the selected row
-                    function openEditModal(role, roleDesc, createdAt) {
+                    function openEditModal(roleId, role, roleDesc) {
+                        document.getElementById('editRoleId').value = roleId; // Set role ID
                         document.getElementById('editDisplayName').value = role;
                         document.getElementById('editDescription').value = roleDesc;
+
+                        // Update form action with the role ID
+                        const form = document.getElementById('editRoleForm');
+                        form.action = form.action.replace('role_id_placeholder', roleId);
+
                         toggleEditModal(true);
                     }
 
@@ -125,6 +129,7 @@
                         alert("Role deleted!"); // Placeholder for actual deletion logic
                         toggleEditModal(false);
                     }
+
                     setTimeout(() => {
                         const alert = document.getElementById('successMessage');
                         if (alert) {

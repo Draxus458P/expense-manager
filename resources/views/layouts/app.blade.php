@@ -36,7 +36,7 @@
                             </a>
                             <ul id="userManagementDropdown" class="hidden ml-4 mt-2">
                                 <li class="mb-2">
-                                    <a href="{{ route('admin.adminroles') }}" class="text-white hover:text-blue-300">Roles</a>
+                                    <a href="{{ route('roles.index') }}" class="text-white hover:text-blue-300">Roles</a>
 
                                 </li>
                                 <li>

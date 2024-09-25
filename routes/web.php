@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminCategoriesController;
 use App\Http\Controllers\Admin\AdminExpensesController;
 use App\Http\Controllers\User\UserCategoriesController;
 use App\Http\Controllers\User\UserExpensesController;
+use App\Http\Controllers\Admin\AdminUploadRoleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,20 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::get('/user/userexpenses', [UserExpensesController::class, 'index'])->name('user.userexpenses');
+});
+
+Route::prefix('admin')->group(function () {
+    // Route to display roles page
+    Route::get('/roles', [AdminUploadRoleController::class, 'index'])->name('roles.index');
+
+    // Route to store a new role
+    Route::post('/roles', [AdminUploadRoleController::class, 'store'])->name('roles.store');
+
+    // Route to update an existing role
+    Route::put('/roles/{role}', [AdminUploadRoleController::class, 'update'])->name('roles.update');
+
+    // Route to delete a role
+    Route::delete('/roles/{role}', [AdminUploadRoleController::class, 'destroy'])->name('roles.destroy');
 });
 
 // Load authentication routes
